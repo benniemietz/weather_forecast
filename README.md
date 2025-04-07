@@ -6,6 +6,34 @@ This is a Ruby-based weather application that provides forecast data using the V
 
 * Ruby version: 3.x.x 
 
+## Installation
+
+To install the required dependencies, run:
+
+```bash
+bundle install
+```
+
+This will install all gems specified in the Gemfile.
+
+## Running the Application
+
+To start the Rails server, run:
+
+```bash
+rails server
+# or the shorthand version
+rails s
+```
+
+By default, the server will run on port 3000. You can access the application by visiting `http://localhost:3000` in your web browser.
+
+To run the server on a different port:
+
+```bash
+rails server -p 4000
+```
+
 * Configuration
 ## Weather API Configuration
 
