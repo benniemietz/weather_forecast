@@ -1,8 +1,7 @@
 class WeatherApiService
-
   def initialize
-    @api_key = ENV['WEATHER_API_KEY']
-    @weather_url = ENV['WEATHER_URL']
+    @api_key = ENV["WEATHER_API_KEY"]
+    @weather_url = ENV["WEATHER_URL"]
   end
 
   # Get the forecast for a given location using this API https://www.visualcrossing.com/weather-api/
@@ -14,7 +13,7 @@ class WeatherApiService
     Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
       encoded_location = ERB::Util.url_encode(location)
       api_url = "#{ENV['WEATHER_URL']}/#{encoded_location}/next7days?unitGroup=us&include=current&key=#{ENV['WEATHER_API_KEY']}&include=days&contentType=json"
-      
+
       response = HTTParty.get(api_url, format: :plain)
 
       if response.success?
@@ -30,9 +29,9 @@ class WeatherApiService
       end
     end
   end
-  
+
   private
-  
+
   # Extract zip code from location string
   def extract_zip_code(location)
     # Match US zip code pattern (5 digits, optionally followed by dash and 4 more digits)
@@ -42,8 +41,8 @@ class WeatherApiService
 
   def generate_cache_key(location)
     # Extract zip code from location if possible
-    zip_code = extract_zip_code(location) 
-    
+    zip_code = extract_zip_code(location)
+
     zip_code ? "weather_forecast_#{zip_code}" : "weather_forecast_#{location.to_s.parameterize(separator: "_")}"
   end
 end

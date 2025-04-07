@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root 'forecasts#index'
+  root "forecasts#index"
 
-  get 'forecasts/get_forecast', to: 'forecasts#get_forecast'
+  get "forecasts/get_forecast", to: "forecasts#get_forecast"
 end

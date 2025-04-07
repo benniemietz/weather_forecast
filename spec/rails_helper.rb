@@ -57,4 +57,4 @@ RSpec.configure do |config|
 
   # Include time travel helpers for testing
   config.include ActiveSupport::Testing::TimeHelpers
-end 
+end

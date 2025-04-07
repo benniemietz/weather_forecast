@@ -25,7 +25,7 @@ gem "thruster", require: false
 
 gem "httparty"
 
-gem 'rack-cors'
+gem "rack-cors"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -40,8 +40,8 @@ end
 
 group :test do
   # ... other test gems ...
-  gem 'rspec-rails'
-  gem 'vcr'
-  gem 'webmock'
-  gem 'rails-controller-testing'
+  gem "rspec-rails"
+  gem "vcr"
+  gem "webmock"
+  gem "rails-controller-testing"
 end
