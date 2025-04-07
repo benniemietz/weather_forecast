@@ -1,0 +1,30 @@
+<div class="forecast-container" data-controller="forecast">
+  <div class="forecast-wrapper">
+    <div class="forecast-card">
+      <div class="forecast-header">
+        <h2 class="forecast-title">Weather Forecast</h2>
+      </div>
+      <div class="forecast-body">
+        <%= form_with url: forecasts_get_forecast_path, 
+                      method: :get, 
+                      data: { 
+                        forecast_target: "form",
+                        action: "submit->forecast#submit" 
+                      },
+                      class: "forecast-form" do |f| %>
+          <div class="form-group">
+            <%= f.label :location, "Enter an address:", class: "forecast-label" %>
+            <%= f.text_field :location, class: "forecast-input", required: true, value: params[:location] %>
+          </div>
+          <div class="forecast-actions">
+            <%= f.submit "Get Forecast", class: "forecast-button" %>
+          </div>
+        <% end %>
+
+        <div id="forecast-results" class="forecast-results" data-forecast-target="results">
+          <%= render 'forecast' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

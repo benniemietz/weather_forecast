@@ -1,0 +1,75 @@
+<% if @forecast.present? %>
+  <% if @forecast[:error].present? || @forecast["error"].present? %>
+    <div class="forecast-error alert alert-warning">
+      <i class="fas fa-exclamation-triangle"></i>
+      <strong>Weather data unavailable:</strong>
+      <%= @forecast[:error] || @forecast["error"] %>
+    </div>
+  <% else %>
+    <div class="forecast-container">
+      <div class="forecast-header">
+        <h2 class="mb-2"><i class="fas fa-map-marker-alt"></i> Weather for <%= @forecast["resolvedAddress"] rescue @forecast.location rescue @forecast %></h2>
+        <% if @forecast["timezone"].present? %>
+          <p class="text-muted"><i class="far fa-clock"></i> Timezone: <%= @forecast["timezone"] %></p>
+        <% end %>
+      </div>
+
+      <div class="forecast-days">
+        <% if @forecast["days"].present? %>
+          <% @forecast["days"].each do |day| %>
+            <div class="forecast-day-card">
+              <div class="date-header">
+                <h4><%= Date.parse(day["datetime"]).strftime("%A, %b %d") rescue day["datetime"] %></h4>
+              </div>
+              <div class="weather-details">
+                <div class="temp-container">
+                  <div class="high-temp"><%= day["tempmax"].round %>°</div>
+                  <div class="low-temp"><%= day["tempmin"].round %>°</div>
+                </div>
+                <div class="conditions-container">
+                  <div class="condition-icon">
+                    <% icon_class = case day["icon"] 
+                      when "clear-day" then "fas fa-sun"
+                      when "partly-cloudy-day" then "fas fa-cloud-sun"
+                      when "cloudy" then "fas fa-cloud"
+                      when "rain" then "fas fa-cloud-rain"
+                      else "fas fa-cloud"
+                      end 
+                    %>
+                    <i class="<%= icon_class %> fa-2x"></i>
+                  </div>
+                  <div class="condition-text">
+                    <div><strong><%= day["conditions"] %></strong></div>
+                    <div class="description"><%= day["description"] %></div>
+                  </div>
+                </div>
+              </div>
+              <div class="additional-details">
+                <div class="detail-item">
+                  <i class="fas fa-tint"></i> Humidity: <%= day["humidity"] %>%
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-wind"></i> Wind: <%= day["windspeed"] %> mph
+                </div>
+                <% if day["precipprob"] && day["precipprob"] > 0 %>
+                  <div class="detail-item">
+                    <i class="fas fa-umbrella"></i> Precip: <%= day["precipprob"] %>%
+                  </div>
+                <% end %>
+                <div class="detail-item">
+                  <i class="fas fa-sun"></i> UV: <%= day["uvindex"] %>
+                </div>
+              </div>
+              <div class="sun-times">
+                <div><i class="fas fa-sunrise"></i> <%= day["sunrise"] %></div>
+                <div><i class="fas fa-sunset"></i> <%= day["sunset"] %></div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <%= sanitize @forecast.html_content rescue sanitize(@forecast.to_s) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

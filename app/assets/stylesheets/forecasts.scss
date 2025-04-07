@@ -1,0 +1,109 @@
+.forecast-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.forecast-header {
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
+  color: white;
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: 20px;
+}
+.forecast-days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+}
+.forecast-day-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  padding: 15px;
+  width: calc(25% - 15px);
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+.forecast-day-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+}
+.date-header {
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.temp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.high-temp {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e74c3c;
+}
+.low-temp {
+  font-size: 18px;
+  color: #3498db;
+}
+.conditions-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.condition-icon {
+  color: #f39c12;
+}
+.description {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+.additional-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+.detail-item {
+  font-size: 12px;
+  color: #555;
+}
+.detail-item i {
+  margin-right: 5px;
+  color: #3498db;
+}
+.sun-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #7f8c8d;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+@media (max-width: 992px) {
+  .forecast-day-card {
+    width: calc(33.33% - 15px);
+  }
+}
+
+@media (max-width: 768px) {
+  .forecast-day-card {
+    width: calc(50% - 15px);
+  }
+}
+
+@media (max-width: 576px) {
+  .forecast-day-card {
+    width: 100%;
+  }
+} 

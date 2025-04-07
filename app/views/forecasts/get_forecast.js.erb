@@ -1,0 +1,5 @@
+<% if @forecast && @forecast[:error] %>
+  document.querySelector("[data-forecast-target='results']").innerHTML = "<%= j render partial: 'forecast', locals: { error: @forecast[:error] } %>";
+<% else %>
+  document.querySelector("[data-forecast-target='results']").innerHTML = "<%= j render partial: 'forecast' %>";
+<% end %> 

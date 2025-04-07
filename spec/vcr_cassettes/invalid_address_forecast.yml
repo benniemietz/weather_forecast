@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline//next7days?contentType=json&include=days&key=<WEATHER_API_KEY>&unitGroup=us
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 400
+      message: ''
+    headers:
+      Date:
+      - Mon, 07 Apr 2025 18:32:21 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '49'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Methods:
+      - GET, POST, DELETE, PUT
+      Access-Control-Allow-Headers:
+      - X-Requested-With, Content-Type, X-Codingpedia
+      X-Powered-By:
+      - Visual Crossing Weather
+    body:
+      encoding: ASCII-8BIT
+      string: Bad API Request:Invalid location parameter value.
+  recorded_at: Mon, 07 Apr 2025 18:32:21 GMT
+recorded_with: VCR 6.3.1
