@@ -16,8 +16,7 @@ class WeatherApiService
       api_url = "#{ENV['WEATHER_URL']}/#{encoded_location}/next7days?unitGroup=us&include=current&key=#{ENV['WEATHER_API_KEY']}&include=days&contentType=json"
       
       response = HTTParty.get(api_url, format: :plain)
-      debugger
-      
+
       if response.success?
         begin
           JSON.parse(response.body)

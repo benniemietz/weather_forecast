@@ -29,6 +29,10 @@ RSpec.describe WeatherApiService do
           expect(response['days'].first).to include(
             'datetime', 'tempmax', 'tempmin', 'conditions'
           )
+          expect(response).to have_key('currentConditions')
+          expect(response['currentConditions']).to include(
+            'temp', 'humidity', 'conditions', 'windspeed'
+          )
         end
       end
     end
