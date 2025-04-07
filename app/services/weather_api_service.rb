@@ -13,9 +13,10 @@ class WeatherApiService
     # Fetch the forecast from the cache or make an API call if not cached, delete the cache if the API call fails
     Rails.cache.fetch(cache_key, expires_in: 30.minutes) do
       encoded_location = ERB::Util.url_encode(location)
-      api_url = "#{ENV['WEATHER_URL']}/#{encoded_location}/next7days?unitGroup=us&key=#{ENV['WEATHER_API_KEY']}&include=days&contentType=json"
+      api_url = "#{ENV['WEATHER_URL']}/#{encoded_location}/next7days?unitGroup=us&include=current&key=#{ENV['WEATHER_API_KEY']}&include=days&contentType=json"
       
       response = HTTParty.get(api_url, format: :plain)
+      debugger
       
       if response.success?
         begin

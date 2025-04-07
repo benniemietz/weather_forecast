@@ -8,9 +8,74 @@
   <% else %>
     <div class="forecast-container">
       <div class="forecast-header">
-        <h2 class="mb-2"><i class="fas fa-map-marker-alt"></i> Weather for <%= @forecast["resolvedAddress"] rescue @forecast.location rescue @forecast %></h2>
-        <% if @forecast["timezone"].present? %>
-          <p class="text-muted"><i class="far fa-clock"></i> Timezone: <%= @forecast["timezone"] %></p>
+        <!-- Location and Timezone Row -->
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <h2><i class="fas fa-map-marker-alt"></i> Weather for <%= @forecast["resolvedAddress"] rescue @forecast.location rescue @forecast %></h2>
+          </div>
+          
+          <div class="col-md-6 text-md-end">
+            <% if @forecast["timezone"].present? %>
+              <p class="text-muted"><i class="far fa-clock"></i> Timezone: <%= @forecast["timezone"] %></p>
+            <% end %>
+          </div>
+        </div>
+        
+        <!-- Current Conditions Row -->
+        <% if @forecast["currentConditions"].present? %>
+          <div class="row">
+            <div class="col-md-6">
+              <!-- Left side empty -->
+            </div>
+            <div class="col-md-6">
+              <div class="forecast-day-card float-md-end" style="max-width: 400px;">
+                <div class="date-header">
+                  <h4>Current Conditions</h4>
+                </div>
+                <div class="weather-details">
+                  <div class="temp-container">
+                    <div class="high-temp"><%= @forecast["currentConditions"]["temp"].round %>°</div>
+                    <div class="low-temp">Feels: <%= @forecast["currentConditions"]["feelslike"].round %>°</div>
+                  </div>
+                  <div class="conditions-container">
+                    <div class="condition-icon">
+                      <% current_icon_class = case @forecast["currentConditions"]["icon"] 
+                        when "clear-day" then "fas fa-sun"
+                        when "clear-night" then "fas fa-moon"
+                        when "partly-cloudy-day" then "fas fa-cloud-sun"
+                        when "partly-cloudy-night" then "fas fa-cloud-moon"
+                        when "cloudy" then "fas fa-cloud"
+                        when "rain" then "fas fa-cloud-rain"
+                        when "snow" then "fas fa-snowflake"
+                        when "fog" then "fas fa-smog"
+                        else "fas fa-cloud"
+                        end 
+                      %>
+                      <i class="<%= current_icon_class %> fa-2x"></i>
+                    </div>
+                    <div class="condition-text">
+                      <div><strong><%= @forecast["currentConditions"]["conditions"] %></strong></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="additional-details">
+                  <div class="detail-item">
+                    <i class="fas fa-tint"></i> Humidity: <%= @forecast["currentConditions"]["humidity"] %>%
+                  </div>
+                  <div class="detail-item">
+                    <i class="fas fa-wind"></i> Wind: <%= @forecast["currentConditions"]["windspeed"] %> mph
+                  </div>
+                  <div class="detail-item">
+                    <i class="fas fa-sun"></i> UV: <%= @forecast["currentConditions"]["uvindex"] %>
+                  </div>
+                </div>
+                <div class="sun-times">
+                  <div><i class="fas fa-sunrise"></i> <%= @forecast["currentConditions"]["sunrise"] rescue "" %></div>
+                  <div><i class="fas fa-sunset"></i> <%= @forecast["currentConditions"]["sunset"] rescue "" %></div>
+                </div>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
 
